@@ -48,6 +48,16 @@ class HashTable:
     def delete(self, key):
         pass
 
-
+    '''Find the value by key or return (not found!!) or None'''
     def search(self, key):
-        pass
+        index = self.hash(key)
+        current = self.table[index]
+
+        while current: # iterate on all nodes in that index
+            if current.key == key:
+                print(f"Key ---> '{current.key}' value ---> {current.value} found at index ---> {current  .index}.")
+                return current.value
+            current = current.next
+
+        print(f"Key not Found!!!")
+        return None
