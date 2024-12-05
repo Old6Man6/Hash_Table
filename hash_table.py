@@ -23,7 +23,7 @@ class HashTable:
     def create_update(self, key, value):
         index = self.hash(key)
 
-        if self.table[index] is None: # If is empty
+        if self.table[index] is None: # If the slot is empty
             self.table[index] = Node(key, value) # Create new node
             print(f"Key ---> '{key}' added with value ---> '{value}' at index ---> {index}.")
 
@@ -31,18 +31,18 @@ class HashTable:
             current = self.table[index]
             while current:
 
-                if current.key == key:  # If key is the same just update value
+                if current.key == key:  # If the key already exists, update the value
                     current.value = value
                     print(f"Key ---> {key} updated with new value ---> {value}")
-
+                    return
                 if current.next is None:
-                    break # Find last node
+                    break # Find the last node in the chain
 
                 '''Create new node in end of the list'''
                 current = current.next
                 new_Node = Node(key, value)
-                current.next = new_Node # chained new node as next node of current
-                new_Node.prev = current # chained current node as previous node
+                current.next = new_Node # chain new node as next node of current
+                new_Node.prev = current # chain current node as previous node
                 print(f"Collision handled: Key '{key}' added with value '{value}'.")
 
     def delete(self, key):
